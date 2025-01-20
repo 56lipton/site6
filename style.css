@@ -1,0 +1,251 @@
+@font-face{
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-Black__900.ttf") format("opentype");
+    font-weight: 900;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-Bold__700.ttf") format("opentype");
+    font-weight: 700;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-Regular__400.ttf") format("opentype");
+    font-weight: 400;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-ExtraLight__200.ttf") format("opentype");
+    font-weight: 200;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-BlackItalic900.ttf") format("opentype");
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-BoldItalic__700.ttf") format("opentype");
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-Italic__400.ttf") format("opentype");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-ExtraLightItalic__200.ttf") format("opentype");
+    font-weight: 200;
+    font-style: italic;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.main, .color-label, .custom-toggler{ 
+    --background:#353535;
+    --secondary-color:#272727;
+    --accent-color:#EFA638;
+    --text-color:#FFFFFF;
+    --calendar-tiles-color:#646464;
+    transition: 2s;
+}
+
+html{
+    font-size: 20px;
+}
+ 
+h1, h2{
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: 900;
+    color: var(--text-color);
+}
+p{
+    font-size: 1rem;
+    line-height: 1rem;
+    color: var(--text-color);
+}
+
+.main {
+    height: 100vh;
+    background: var(--background);
+}
+.header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary-color);
+    color:var(--text-color);
+
+}
+
+.header__title{
+    margin-left: 24px;
+}
+
+.color-label {
+    position: fixed;
+    bottom: 35px;
+    right: 35px;
+    padding: 22px 45px;
+    width: 355px;
+    border-radius: 50px;
+    color: var(--text-color);
+    text-align: right;
+    background: var(--secondary-color);
+
+}
+.color-toggle {
+    position: fixed;
+    bottom: 51px;
+    right: 300px;
+    z-index: 2;
+    height: 37px;
+    /*Добавлено к ДЗ*/
+    opacity: 0; 
+    width: 70px;
+}
+
+.color-toggle:checked ~ .main{
+    --background:#EBEBEB;
+    --secondary-color:#FFFFFF;
+    --accent-color:#1395DE;
+    --text-color:#000000;
+    --calendar-tiles-color:#D4D4D4;
+}
+.color-toggle:checked ~ .color-label{
+    --background:#EBEBEB;
+    --secondary-color:#FFFFFF;
+    --accent-color:#1395DE;
+    --text-color:#000000;
+    --calendar-tiles-color:#D4D4D4;
+}
+
+
+.calendar {
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calendar__body{
+    width: 1100px;
+    height: 750px;
+    padding: 25px;
+    background: var(--secondary-color);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 140px);
+}
+
+.cell {
+    background: var(--calendar-tiles-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+}
+
+.cell__day-num {
+    color: var(--accent-color);
+}
+.cell__month {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-color);
+}
+
+.cell_monday::after{
+    content: "Пн";
+}
+
+.cell_tuesday::after{
+    content: "Вт";
+}
+.cell_wednesday::after{
+    content: "Ср";
+}
+.cell_thursday::after{
+    content: "Чт";
+}
+.cell_friday::after{
+    content: "Пт";
+}
+.cell_saturday::after{
+    content: "Сб";
+}
+.cell_sunday::after{
+    content: "Вс";
+}
+
+.cell_monday::after, .cell_tuesday::after, .cell_wednesday::after, .cell_thursday::after, .cell_friday::after, .cell_saturday::after, .cell_sunday::after
+{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-color);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: 0.8s;
+    transform-origin: top left;
+}
+
+.cell_monday:hover::after, .cell_tuesday:hover::after,  .cell_wednesday:hover::after, .cell_thursday:hover::after, .cell_friday:hover::after, .cell_saturday:hover::after, .cell_sunday:hover::after{
+    transform: rotateX(0deg);
+}
+
+
+
+.custom-toggler{
+    position: fixed;
+    bottom: 50px;
+    right: 300px;
+    height: 37px;
+    width: 70px;
+    background: var(--background);
+    border-radius: 33px;
+}
+
+.custom-toggle__circle
+{
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    background: var(--accent-color);
+}
+
+.color-toggle:checked ~ .custom-toggler .custom-toggle__circle{
+    margin-left: auto;
+}
